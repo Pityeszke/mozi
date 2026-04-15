@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    color: #333;
+}
+
+.film, .vetites {
+    background-color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.terem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sor {
+    display: flex;
+    margin: 5px;
+}
+
+.hely {
+    width: 50px;
+    height: 50px;
+    margin: 2px;
+    background-color: #e0e0e0;
+}
+
+.hely:hover {
+    background-color: #d0d0d0;
+}
