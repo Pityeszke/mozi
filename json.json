@@ -1,0 +1,36 @@
+{"filmek":
+    [
+        {
+            "id":1,
+            "cim":"A Gyűrűk Ura: A Gyűrű Szövetsége",
+            "rendezo":"Peter Jackson",
+            "ev":2001,
+            "mufaj":"fantasy",
+            "hossz":178,
+            "korhatar":12,
+            "mufajok":["fantasy","kaland"],
+            "kep_url":"valami.jpg",
+            "vetitesek":
+            [
+                {
+                "id":101,
+                "mozi":"Cinema City Aréna",
+                "terem":"1",
+                "kezdes":"2024-07-01T19:00:00",
+                "vege":"2024-07-01T22:00:00",
+                "nyelv":"szinkron",
+                "formatum": "IMAX"},
+                {
+                "id":102,
+                "mozi":"Cinema City Aréna",
+                "terem":"3",
+                "kezdes":"2024-07-01T19:00:00",
+                "vege":"2024-07-01T22:00:00",
+                "nyelv":"feliratos",
+                "formatum": "2D"
+                }
+            ]
+        }
+    ]
+}
+
