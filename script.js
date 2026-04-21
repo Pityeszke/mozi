@@ -1,94 +1,57 @@
-let filmek = [];
+const filmek = [
+    { id: 1, cim: "The 90s Ohm", year: 2024, image: "poster1.jpg", badge: "IMPRESS" },
+    { id: 2, cim: "Fives Égen Ötletek", year: 2024, image: "poster2.jpg" },
+    { id: 3, cim: "The Housemaid", year: 2024, image: "poster3.jpg" },
+    { id: 4, cim: "A Bir Jáva", year: 2024, image: "poster4.jpg" },
+    { id: 5, cim: "Ismeretlen - Támadás", year: 2024, image: "poster5.jpg" },
+    { id: 6, cim: "Zootropolis", year: 2024, image: "poster6.jpg" },
+    { id: 7, cim: "Avatar: Utolsó Lélegzet", year: 2024, image: "poster7.jpg" },
+    { id: 8, cim: "Agugrász", year: 2024, image: "poster8.jpg" },
+    { id: 9, cim: "Halál Cikk", year: 2024, image: "poster9.jpg" },
+    { id: 10, cim: "Birmingham Bandája", year: 2024, image: "poster10.jpg" },
+    { id: 11, cim: "Nurnberg", year: 2024, image: "poster11.jpg" },
+    { id: 12, cim: "The Restless Hungarian", year: 2024, image: "poster12.jpg", badge: "IMPRESS" },
+    { id: 13, cim: "Segítség!", year: 2024, image: "poster13.jpg" },
+    { id: 14, cim: "Hálál Bolygó", year: 2024, image: "poster14.jpg" },
+    { id: 15, cim: "Husz Tudnék Zájadult?", year: 2024, image: "poster15.jpg" },
+    { id: 16, cim: "Senki 2", year: 2024, image: "poster16.jpg" }
+];
 
-async function jsonBetoltes() {
-    try {
-        const response = await fetch('json.json');
-        const data = await response.json();
-        filmek = data.filmek;
-    } catch (error) {
-        console.error('Hiba a JSON betöltésekor:', error);
-    }
-}
+function generateFilmGrid() {
+    const filmGrid = document.getElementById('filmGrid');
+    filmGrid.innerHTML = '';
 
-function betoltes(){
-    let div = document.getElementById("tartalom");
-    div.innerHTML = ''; // Töröljük a korábbi tartalmat
-    for (let i = 0; i < filmek.length; i++) {
-        let film = filmek[i];
-        let filmDiv = document.createElement("div");
-        filmDiv.className = "film";
-        filmDiv.innerHTML = `
-            <h2>${film.cim}</h2>
-            <p>Rendező: ${film.rendezo}</p>
-            <p>Év: ${film.ev}</p>
-            <p>Műfaj: ${film.mufaj}</p>
-            <p>Hossz: ${film.hossz} perc</p>
-            <p>Korhatár: ${film.korhatar}</p>
-            <button onclick="vetitesekMegjelenites(${film.id})">Vetítések megtekintése</button>
+    filmek.forEach(film => {
+        const filmCard = document.createElement('div');
+        filmCard.className = 'film-card';
+        
+        const imagePath = `https://via.placeholder.com/160x240/1a1a1a/FFB000?text=${encodeURIComponent(film.cim.substring(0, 10))}`;
+        
+        filmCard.innerHTML = `
+            ${film.badge ? `<div class="badge">${film.badge}</div>` : ''}
+            <img src="${imagePath}" alt="${film.cim}" onerror="this.src='https://via.placeholder.com/160x240/333/999?text=No+Image'">
+            <div class="film-overlay">
+                <button class="play-btn">▶</button>
+            </div>
         `;
-        div.appendChild(filmDiv);
-    }
-}
 
-function vetitesekMegjelenites(filmId) {
-    const film = filmek.find(f => f.id === filmId);
-    let div = document.getElementById("tartalom");
-    div.innerHTML = `<h2>${film.cim} - Vetítések</h2>`;
-    film.vetitesek.forEach(vetites => {
-        let vetitesDiv = document.createElement("div");
-        vetitesDiv.className = "vetites";
-        vetitesDiv.innerHTML = `
-            <p>Mozi: ${vetites.mozi}</p>
-            <p>Terem: ${vetites.terem}</p>
-            <p>Kezdés: ${new Date(vetites.kezdes).toLocaleString()}</p>
-            <p>Nyelv: ${vetites.nyelv}</p>
-            <p>Formátum: ${vetites.formatum}</p>
-            <button onclick="helyekMegjelenites(${film.id}, ${vetites.id})">Helyek foglalása</button>
-        `;
-        div.appendChild(vetitesDiv);
+        filmCard.addEventListener('click', () => {
+            console.log(`Kattintottál: ${film.cim}`);
+        });
+
+        filmGrid.appendChild(filmCard);
     });
-    let visszaBtn = document.createElement("button");
-    visszaBtn.textContent = "Vissza a filmekhez";
-    visszaBtn.onclick = betoltes;
-    div.appendChild(visszaBtn);
 }
 
-function helyekMegjelenites(filmId, vetitesId) {
-    let div = document.getElementById("tartalom");
-    div.innerHTML = `<h2>Helyek foglalása</h2>`;
-    
-    // Egyszerű 5x5 terem
-    let teremDiv = document.createElement("div");
-    teremDiv.className = "terem";
-    for (let sor = 1; sor <= 5; sor++) {
-        let sorDiv = document.createElement("div");
-        sorDiv.className = "sor";
-        for (let hely = 1; hely <= 5; hely++) {
-            let helyBtn = document.createElement("button");
-            helyBtn.className = "hely";
-            helyBtn.textContent = `${sor}-${hely}`;
-            helyBtn.onclick = () => helyFoglalas(filmId, vetitesId, sor, hely);
-            sorDiv.appendChild(helyBtn);
-        }
-        teremDiv.appendChild(sorDiv);
-    }
-    div.appendChild(teremDiv);
-    
-    let visszaBtn = document.createElement("button");
-    visszaBtn.textContent = "Vissza a vetítésekhez";
-    visszaBtn.onclick = () => vetitesekMegjelenites(filmId);
-    div.appendChild(visszaBtn);
-}
+document.addEventListener('DOMContentLoaded', () => {
+    generateFilmGrid();
 
-function helyFoglalas(filmId, vetitesId, sor, hely) {
-    // Egyszerű foglalás tárolás localStorage-ban
-    let foglalasok = JSON.parse(localStorage.getItem('foglalasok') || '[]');
-    foglalasok.push({ filmId, vetitesId, sor, hely });
-    localStorage.setItem('foglalasok', JSON.stringify(foglalasok));
-    alert(`Hely foglalva: ${sor}-${hely}`);
-}
-
-addEventListener("DOMContentLoaded", async () => {
-    await jsonBetoltes();
-    betoltes();
+    // Filter gombok
+    const filterBtns = document.querySelectorAll('.nav-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            e.target.classList.add('active');
+        });
+    });
 });
