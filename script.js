@@ -1,3 +1,6 @@
+let filmek = fetch("filmek.json")
+    .then(response => response.json())
+
 function betoltes(){
     let div = document.getElementById("tartalom");
     for (let i = 0; i < filmek.length; i++) {
