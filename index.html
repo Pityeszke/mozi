@@ -41,6 +41,31 @@
         <div class="film-grid" id="filmGrid">
             <!-- Filmek dinamikusan kerülnek ide -->
         </div>
+
+        <section class="seat-booking hidden" id="seatBooking">
+            <div class="booking-header">
+                <div>
+                    <h2 id="selectedMovieTitle">Válassz filmet és ülést</h2>
+                    <p id="bookingInfo">Kattints egy mozikártyára, hogy megnyíljanak a helyfoglalási lehetőségek.</p>
+                </div>
+                <div class="legend">
+                    <span class="legend-item available"></span><span>Szabad</span>
+                    <span class="legend-item reserved"></span><span>Foglalt</span>
+                    <span class="legend-item selected"></span><span>Kiválasztott</span>
+                </div>
+            </div>
+
+            <div class="screen">Vászon</div>
+            <div class="seat-grid" id="seatGrid"></div>
+
+            <div class="booking-actions">
+                <p>Választott ülések: <strong id="selectedCount">0</strong></p>
+                <div class="booking-buttons">
+                    <button id="confirmBookingBtn" class="booking-btn">Foglalás</button>
+                    <button id="clearSelectionBtn" class="booking-btn alt">Törlés</button>
+                </div>
+            </div>
+        </section>
     </main>
 
 >>>>>>> 204b86bb3bb15877fdb024375768a30b71a7087f
